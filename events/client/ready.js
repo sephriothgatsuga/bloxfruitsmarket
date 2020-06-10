@@ -4,7 +4,7 @@ module.exports = async bot => {
 
    let statuses = [
        "Devil Fruit Stocks",
-       `${bot.guilds.cache.size}`
+       `${bot.guilds.cache.size} crews`
    ]
 
    setInterval(function() {
