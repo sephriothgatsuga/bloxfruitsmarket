@@ -10,7 +10,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        if(message.author.id === '173977882765426688'){
+        if(message.member.roles.cache.has('720243516734832711')){
           let fruit = args[0];
           if(!fruit){
             return message.channel.send('You need to specify a fruit!');

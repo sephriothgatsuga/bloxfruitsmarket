@@ -12,22 +12,27 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray()
+        if(message.member.roles.cache.has('720243516734832711')){
+            
+            const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray()
 
-        let color = await getColorFromURL(bot.user.displayAvatarURL())
+            let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
 
-        var stocky = new MessageEmbed()
-            .setTitle('Current Stock')
-            .setColor(color)
-            .setThumbnail(bot.user.displayAvatarURL())
-            .setFooter(`${message.createdAt.toLocaleString()}`, bot.user.displayAvatarURL())
+            var stocky = new MessageEmbed()
+                .setTitle('Current Stock')
+                .setColor(color)
+                .setThumbnail(bot.user.displayAvatarURL())
+                .setFooter(`${message.createdAt.toLocaleString()}`, bot.user.displayAvatarURL())
 
-        ;(await fruits).map(fruit => {
-            stocky.addField(`${fruit.type}`, `${fruit.name}`, true)
-            stocky.addField('Prices', `${fruit.bprice} Beli\nR$${fruit.rprice}`, true)
-            stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
-        });
+            ;(await fruits).map(fruit => {
+                stocky.addField(`${fruit.type}`, `${fruit.name}`, true)
+                stocky.addField('Prices', `${fruit.bprice} Beli\nR$${fruit.rprice}`, true)
+                stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
+            });
 
-        bot.channels.cache.find(c => c.name === 'fruit-stock').send(stocky)
+            bot.channels.cache.find(c => c.name === 'fruit-stock').send(stocky)
+        }
+
+        
     }
 }

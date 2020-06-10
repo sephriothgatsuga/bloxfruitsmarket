@@ -12,7 +12,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray();
-        let color = await getColorFromURL(bot.user.displayAvatarURL())
+        let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
 
         var stocky = new MessageEmbed()
             .setTitle('Current Stock')
