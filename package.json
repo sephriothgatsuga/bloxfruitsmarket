@@ -30,6 +30,7 @@
   "dependencies": {
     "color-thief-node": "^1.0.3",
     "common-tags": "^1.8.0",
+    "date-and-time": "^0.13.1",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "mongodb": "^3.5.8",
