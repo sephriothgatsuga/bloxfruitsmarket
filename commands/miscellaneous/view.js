@@ -15,10 +15,10 @@ module.exports = {
         let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
 
         var stocky = new MessageEmbed()
-            .setTitle('Current Stock')
+            .setTitle(`Current Stock as of ${message.createdAt.toLocaleTimeString()}`)
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
-            .setFooter(`${message.createdAt.toLocaleString()}`, bot.user.displayAvatarURL())
+            .setFooter('Stocker is life', bot.user.displayAvatarURL())
 
         ;(await fruits).map(fruit => {
             stocky.addField(`${fruit.type}`, `${fruit.name}`, true)
