@@ -32,7 +32,9 @@ module.exports = {
                 stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
             });
 
-            bot.channels.cache.find(c => c.name === 'fruit-stock').send(stocky)
+            //console.log(bot.guilds.cache.map(g => g.roles.cache))
+
+            bot.guilds.cache.map(g => g.channels.cache.find(guild => guild.name === 'fruit-stock').send(stocky))
         } else{
             return message.channel.send('You\'re not authorized to do this!');
         }
