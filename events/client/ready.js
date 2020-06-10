@@ -3,7 +3,8 @@ module.exports = async bot => {
    // bot.user.setActivity("Hello", {type: "STREAMING", url:"https://twitch.tv/Strandable"});
 
    let statuses = [
-       "Devil Fruit Stocks"
+       "Devil Fruit Stocks",
+       `${bot.guilds.cache.size}`
    ]
 
    setInterval(function() {

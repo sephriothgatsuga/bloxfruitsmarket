@@ -15,7 +15,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
         
-        const scolor = await getColorFromURL(bot.user.displayAvatarURL());
+        const scolor = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png'}));
         
         const embed = new MessageEmbed()
             .setColor(scolor)
