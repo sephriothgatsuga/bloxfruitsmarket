@@ -11,7 +11,7 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (bot, message, args) => {
-        const fruits = (await datab).db('bloxfruitsdealer').collection('fruits').find({ instock: true }).toArray();
+        const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray();
         let color = await getColorFromURL(bot.user.displayAvatarURL())
 
         var stocky = new MessageEmbed()

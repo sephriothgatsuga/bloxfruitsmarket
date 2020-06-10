@@ -1,7 +1,6 @@
 const datab = require('../../utils/database/database');
 const { MessageEmbed } = require('discord.js');
 const { getColorFromURL } = require('color-thief-node');
-var ids = []
 
 module.exports = { 
     config: {
@@ -13,7 +12,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        const fruits = (await datab).db('bloxfruitsdealer').collection('fruits').find({ instock: true }).toArray()
+        const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray()
 
         let color = await getColorFromURL(bot.user.displayAvatarURL())
 
@@ -29,9 +28,6 @@ module.exports = {
             stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
         });
 
-        bot.channels.cache.find(c => c.name === 'fruit-stock').send(stocky).then(m => {
-            ids.push(m.id);
-            console.log(ids);
-        })
+        bot.channels.cache.find(c => c.name === 'fruit-stock').send(stocky)
     }
 }

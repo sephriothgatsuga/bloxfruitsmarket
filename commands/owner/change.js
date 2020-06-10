@@ -25,7 +25,7 @@ module.exports = {
             return message.channel.send('Option Invalid!')
           }
 
-          let update = (await datab).db('bloxfruitsdealer').collection('fruits').findOneAndUpdate({ name: fruit }, { $set: { instock: option } });
+          let update = (await datab).db('heroku_vf3mq7pv').collection('fruits').findOneAndUpdate({ name: fruit }, { $set: { instock: option } });
             update.then(() => message.channel.send('Fruit stock changed!'))
         } else{
           return message.channel.send('You\'re not authorized to do this!');
