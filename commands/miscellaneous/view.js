@@ -15,7 +15,7 @@ module.exports = {
         let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
 
         var stocky = new MessageEmbed()
-            .setTitle(`Current Stock as of ${message.createdAt.toTimeString()}`)
+            .setTitle(`Current Stock as of ${message.createdAt.toLocaleTimeString()}`)
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
             .setFooter('Stocker is life', bot.user.displayAvatarURL())
