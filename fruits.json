@@ -1,0 +1,178 @@
+[
+    {
+        "name": "Bomb",
+        "bprice": "5,000",
+        "rprice": "50",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 15",
+        "instock": true
+    },
+    {
+        "name": "Spike",
+        "bprice": "7,500",
+        "rprice": "75",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 15",
+        "instock": true
+    },
+    {
+        "name": "Chop",
+        "bprice": "30,000",
+        "rprice": "50",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 20, 50",
+        "instock": false
+    },
+    {
+        "name": "Spring",
+        "bprice": "60,000",
+        "rprice": "180",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 20, 60, 80",
+        "instock": false
+    },
+    {
+        "name": "Smoke",
+        "bprice": "100,000",
+        "rprice": "250",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 20, 50, 10",
+        "instock": false
+    },
+    {
+        "name": "Flame",
+        "bprice": "250,000",
+        "rprice": "550",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 25, 50, 100, 10",
+        "instock": false
+    },
+    {
+        "name": "Ice",
+        "bprice": "350,000",
+        "rprice": "750",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 30, 50, 100",
+        "instock": false
+    },
+    {
+        "name": "Sand",
+        "bprice": "420,000",
+        "rprice": "850",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 40, 80, 120, 15",
+        "instock": false
+    },
+    {
+        "name": "Dark",
+        "bprice": "500,000",
+        "rprice": "950",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 40, 80, 110",
+        "instock": false
+    },
+    {
+        "name": "Light",
+        "bprice": "650,000",
+        "rprice": "1,100",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 40, 80, 110, 10",
+        "instock": false
+    },
+    {
+        "name": "Rubber",
+        "bprice": "750,000",
+        "rprice": "1,200",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 20, 50, 150",
+        "instock": false
+    },
+    {
+        "name": "Barrier",
+        "bprice": "800,000",
+        "rprice": "1,250",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 45, 90, 130, 10",
+        "instock": false
+    },
+    {
+        "name": "Magma",
+        "bprice": "850,000",
+        "rprice": "1,300",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 45, 95, 140, 10",
+        "instock": false
+    },
+    {
+        "name": "Quake",
+        "bprice": "1,000,000",
+        "rprice": "1,500",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 50, 100, 150",
+        "instock": false
+    },
+    {
+        "name": "Human: Buddha",
+        "bprice": "1,200,000",
+        "rprice": "1,650",
+        "type": "Zoan/Beast",
+        "abilevels": "1, 1, 1, 100, 200",
+        "instock": false
+    },
+    {
+        "name": "String",
+        "bprice": "1,500,000 ",
+        "rprice": "1,800",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 50, 100, 225, 15",
+        "instock": false
+    },
+    {
+        "name": "Bird: Phoenix",
+        "bprice": "1,800,000",
+        "rprice": "2,000",
+        "type": "Zoan/Beast",
+        "abilevels": "1, 90, 160, 250, 30",
+        "instock": false
+    },
+    {
+        "name": "Rumble",
+        "bprice": "2,100,000",
+        "rprice": "2,100",
+        "type": "Logia/Elemental",
+        "abilevels": "1, 90, 160, 250, 30",
+        "instock": false
+    },
+    {
+        "name": "Paw",
+        "bprice": "2,300,000",
+        "rprice": "2,200",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 100, 200, 300, 50",
+        "instock": false
+    },
+    {
+        "name": "Gravity",
+        "bprice": "2,500,000",
+        "rprice": "2,300",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 100, 200, 300, 50",
+        "instock": false
+    },
+    {
+        "name": "Dough",
+        "bprice": "2,800,000",
+        "rprice": "2,400",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 100, 200, 300, 50",
+        "instock": false
+    },
+    {
+        "name": "Control",
+        "bprice": "3,200,000",
+        "rprice": "2,500",
+        "type": "Paramecia/Natural",
+        "abilevels": "1, 1, 150, 350, 250",
+        "instock": false
+    }
+]

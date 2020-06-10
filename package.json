@@ -1,0 +1,38 @@
+{
+  "name": "bloxfruitsmarket",
+  "version": "0.1.0",
+  "description": "Blox Fruits Market",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sephriothgatsuga/bloxfruitsmarket.git"
+  },
+  "keywords": [
+    "blox",
+    "fruits",
+    "roblox",
+    "market"
+  ],
+  "author": "Xephyr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sephriothgatsuga/bloxfruitsmarket/issues"
+  },
+  "homepage": "https://github.com/sephriothgatsuga/bloxfruitsmarket#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "color-thief-node": "^1.0.3",
+    "common-tags": "^1.8.0",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.5.8",
+    "mongoose": "^5.9.18"
+  }
+}
