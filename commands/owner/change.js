@@ -4,7 +4,7 @@ module.exports = {
     config: {
         name: "change",
         description: "Changes the fruit stock",
-        usage: "<fruit name> <true/false>",
+        usage: "[option: multiple] <fruit name> <true/false>",
         category: "miscellaneous",
         accessableby: "Owners"
     },
