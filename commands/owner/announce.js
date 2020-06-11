@@ -54,7 +54,7 @@ module.exports = {
                 stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
             });
 
-            message.guild.channels.cache.find(ch => ch.name === 'test').send('@everyone', stocky).then(m => {
+            message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send('@everyone', stocky).then(m => {
                 setInterval(() => {
                     m.edit(stocky)
                 }, 30000)
