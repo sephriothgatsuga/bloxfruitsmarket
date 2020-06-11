@@ -33,10 +33,9 @@ module.exports = {
             
           } else{
             //working with args
+            fruit = args[0];
             if(fruit.startsWith('Human') || fruit.startsWith('Bird')){
               fruit = args.splice(0, 2).join(' ');
-            } else {
-              fruit = args[0];
             }
             // option true/false
             if(option === 'true'){
