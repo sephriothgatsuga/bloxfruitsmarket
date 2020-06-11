@@ -11,12 +11,15 @@ module.exports = {
     run: async (bot, message, args) => {
 
         if(message.member.roles.cache.has('720243516734832711')){
-          let fruit = args[0];
-          if(!fruit){
-            return message.channel.send('You need to specify a fruit!');
-          } 
           
-          let option = args[1];
+          var fruit = args[0];
+          var option = args[1];
+          if(fruit.startsWith('Human') || fruit.startsWith('Bird')){
+            option = args[2];
+            fruit = args.splice(0, 2).join(' ');
+          }
+          
+          
           if(option === 'true'){
             option = true;
           } else if(option === 'false'){
