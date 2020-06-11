@@ -3,6 +3,8 @@ const { MessageEmbed } = require('discord.js');
 const { getColorFromURL } = require('color-thief-node');
 const date = require('date-and-time');
 const cd = require('countdown');
+const database = require('../../utils/database/database');
+const { CommandCursor } = require('mongodb');
 
 module.exports = { 
     config: {
@@ -14,7 +16,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        if(message.member.roles.cache.has('720243516734832711')){
+        if(message.member.permissions.has('ADMINISTRATOR')){
             
             const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray()
 
@@ -53,12 +55,8 @@ module.exports = {
                 stocky.addField('Prices', `${fruit.bprice} Beli\nR$${fruit.rprice}`, true)
                 stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
             });
-
-            message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send('@everyone', stocky).then(m => {
-                setInterval(() => {
-                    m.edit(stocky)
-                }, 30000)
-            });
+            //send
+            message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send('@everyone', stocky)
         } else{
             return message.channel.send('You\'re not authorized to do this!');
         }
