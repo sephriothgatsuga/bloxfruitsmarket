@@ -8,4 +8,4 @@ const db = require('./utils/database/database');
 
 db.then(() => console.log('Connected to Database!')).catch(err => console.log(err));
 
-bot.login(process.env.TOKEN);
+bot.login(process.env.DEVTOKEN);

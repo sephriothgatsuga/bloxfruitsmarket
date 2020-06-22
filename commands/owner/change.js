@@ -10,7 +10,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        const db = (await datab).db('heroku_vf3mq7pv').collection('fruits');
+        const db = (await datab).db('heroku_ddsf2qgt').collection('fruits');
         let option = args[args.length - 1];
         let fruit;
 

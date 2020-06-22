@@ -3,8 +3,6 @@ const { MessageEmbed } = require('discord.js');
 const { getColorFromURL } = require('color-thief-node');
 const date = require('date-and-time');
 const cd = require('countdown');
-const database = require('../../utils/database/database');
-const { CommandCursor } = require('mongodb');
 
 module.exports = { 
     config: {
@@ -18,7 +16,7 @@ module.exports = {
 
         if(message.member.permissions.has('ADMINISTRATOR')){
             
-            const fruits = (await datab).db('heroku_vf3mq7pv').collection('fruits').find({ instock: true }).toArray()
+            const fruits = (await datab).db('heroku_ddsf2qgt').collection('fruits').find({ instock: true }).toArray()
 
             let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
             let datee = date.format(message.createdAt, 'hh:mm A [GMT]Z', true);
@@ -56,7 +54,23 @@ module.exports = {
                 stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
             });
             //send
-            message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send('@everyone', stocky)
+            if(message.guild.id === '720801303885905931'){
+                var mentions = []
+                if(stocky.fields.find(f => f.value === 'Bomb')){
+                    console.log('bomb fruit found');
+                    mentions.push('<@&720813739926093826>');
+                } if(stocky.fields.find(f => f.value === 'Magma')){
+                    console.log('spike fruit');
+                    mentions.push('<@&720812895621087322>');
+                } else {
+                    mentions.push('@everyone')
+                    console.log('fruits not found');
+                }
+                message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send(`${mentions.map(m => m).join(' ')}`, stocky);
+            } else{
+                message.guild.channels.cache.find(ch => ch.name === 'fruit-stock').send('@everyone', stocky);
+            }
+            
         } else{
             return message.channel.send('You\'re not authorized to do this!');
         }
