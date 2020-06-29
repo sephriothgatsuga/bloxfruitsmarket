@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js');
 const { getColorFromURL } = require('color-thief-node');
-const datab = require('../../utils/database/database');
 const date = require('date-and-time');
 const cd = require('countdown');
+const Fruits = require('../../utils/models/Fruits');
 
 module.exports = { 
     config: {
@@ -13,7 +13,6 @@ module.exports = {
         accessableby: "Members"
     },
     run: async (bot, message, args) => {
-        const fruits = (await datab).db('heroku_ddsf2qgt').collection('fruits').find({ instock: true }).toArray();
         let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
         let datee = date.format(message.createdAt, 'hh:mm A [GMT]Z', true);
 
@@ -44,13 +43,18 @@ module.exports = {
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
             .setFooter('Stocker is life', bot.user.displayAvatarURL())
-
-        ;(await fruits).map(fruit => {
-            stocky.addField(`${fruit.type}`, `${fruit.name}`, true)
-            stocky.addField('Prices', `${fruit.bprice} Beli\nR$${fruit.rprice}`, true)
-            stocky.addField('Ability Levels', `${fruit.abilevels}`, true)
+        
+        let fruits;
+        await Fruits.find({ instock: true }, (err, res) => {
+            if(err) throw err;
+            fruits = res;
+        });
+        await fruits.map(f => {
+            stocky.addField(`${f.type}`, `${f.name}`, true)
+            stocky.addField('Prices', `${f.bprice} Beli\nR$${f.rprice}`, true)
+            stocky.addField('Ability Levels', `${f.abilevels}`, true)
         });
         
-        return message.channel.send(stocky)
+        return message.channel.send(stocky);
   }
 }

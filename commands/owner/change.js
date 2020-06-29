@@ -1,4 +1,4 @@
-const datab = require('../../utils/database/database');
+const Fruits = require('../../utils/models/Fruits');
 
 module.exports = { 
     config: {
@@ -10,7 +10,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-        const db = (await datab).db('heroku_ddsf2qgt').collection('fruits');
+        let db = Fruits;
         let option = args[args.length - 1];
         let fruit;
 
