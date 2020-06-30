@@ -3,13 +3,23 @@ module.exports = async bot => {
    // bot.user.setActivity("Hello", {type: "STREAMING", url:"https://twitch.tv/Strandable"});
 
    let statuses = [
-       "Devil Fruit Stocks",
-       `${bot.guilds.cache.size} crews`
-   ]
+       {
+        name: "Devil Fruit Stocks",
+        type: 'WATCHING'
+       },
+       {
+        name: `for ${bot.guilds.cache.size} crews`,
+        type: 'PLAYING' 
+       },
+       {
+        name: `with ${bot.users.cache.size} users`,
+        type: 'PLAYING'
+       }
+    ]
    
    setInterval(function() {
        let status = statuses[Math.floor(Math.random() * statuses.length)];
-       bot.user.setActivity(status, {type: "WATCHING"});
+       bot.user.setActivity(status.name, {type: status.type});
 
-   }, 5000);
+   }, 10000);
 }
