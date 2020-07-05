@@ -1,3 +1,3 @@
 const mongoose = require('mongoose');
-
-module.exports = mongoose.connect(`${process.env.DATABASE}`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+const uri = process.env.DATABASE;
+module.exports = mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
