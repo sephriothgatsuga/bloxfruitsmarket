@@ -11,7 +11,7 @@ module.exports = {
     },
     run: async (bot, message, args) => {
 
-    function duration(time) {
+    function duration(ms) {
         const sec = Math.floor((ms / 1000) % 60).toString()
         const min = Math.floor((ms / (1000 * 60)) % 60).toString()
         const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString()
