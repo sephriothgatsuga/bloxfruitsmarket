@@ -36,25 +36,29 @@ module.exports = {
         }
 
         let cdown = cd(start,  end,cd.HOURS|cd.MINUTES);
-
+        let msg = [
+            'Picking a devil fruit is like an investment',
+            'Choose the fruit that interests you the most',
+            'Thanks for using me!',
+            'Every thing happens for a reason',
+            'Just wait to get the right stock',
+            'Choosing a fruit is like choosing the perfect girl of yours'
+        ]
         var stocky = new MessageEmbed()
             .setTitle(`Current Stock as of ${datee}`)
-            .setDescription(`Verified Fruit Stock\n\nNext Stock is in: ${cdown.hours} Hour(s), ${cdown.minutes} Minute(s)`)
+            .setDescription(`Verified Fruit Stock <:blurple_check:730595553242644640>\n\nNext Stock is in: ${cdown.hours} Hour(s), ${cdown.minutes} Minute(s)`)
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
-            .setFooter('Stocker is life', bot.user.displayAvatarURL())
+            .setFooter(msg[Math.floor(Math.random() * msg.length)], bot.user.displayAvatarURL())
         
-        let fruits;
-        await Fruits.find({ instock: true }, (err, res) => {
-            if(err) throw err;
-            fruits = res;
-        });
-        await fruits.map(f => {
-            stocky.addField(`${f.type}`, `${f.name}`, true)
+        let fruits = await Fruits.find({ instock: true });
+        fruits.map(frut => {
+            let f = frut.toJSON();
+            stocky.addField(`${f.type}`, `${f.emoji} ${f.name}`, true)
             stocky.addField('Prices', `${f.bprice} Beli\nR$${f.rprice}`, true)
             stocky.addField('Ability Levels', `${f.abilevels}`, true)
         });
         
-        return message.channel.send(stocky);
+        message.channel.send(stocky);
   }
 }
