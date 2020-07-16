@@ -3,6 +3,7 @@ const { getColorFromURL } = require('color-thief-node');
 const date = require('date-and-time');
 const cd = require('countdown');
 const Fruits = require('../../utils/models/Fruits');
+const randomMsgs = require('../../utils/models/randomMessages');
 
 module.exports = { 
     config: {
@@ -12,7 +13,7 @@ module.exports = {
         category: "miscellaneous",
         accessableby: "Members"
     },
-    run: async (bot, message, args) => {
+    run: async (bot, message, broadcastChan, pingyrole) => {
         let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
         let datee = date.format(message.createdAt, 'hh:mm A [GMT]Z', true);
 
@@ -36,20 +37,17 @@ module.exports = {
         }
 
         let cdown = cd(start,  end,cd.HOURS|cd.MINUTES);
-        let msg = [
-            'Picking a devil fruit is like an investment',
-            'Choose the fruit that interests you the most',
-            'Thanks for using me!',
-            'Every thing happens for a reason',
-            'Just wait to get the right stock',
-            'Choosing a fruit is like choosing the perfect girl of yours'
-        ]
+        let randomMsg;
+        await randomMsgs.find({}, (err, res) => {
+            randomMsg = res
+        });
+        
         var stocky = new MessageEmbed()
             .setTitle(`Current Stock as of ${datee}`)
             .setDescription(`Verified Fruit Stock <:blurple_check:730595553242644640>\n\nNext Stock is in: ${cdown.hours} Hour(s), ${cdown.minutes} Minute(s)`)
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
-            .setFooter(msg[Math.floor(Math.random() * msg.length)], bot.user.displayAvatarURL())
+            .setFooter(randomMsg[Math.floor(Math.random() * randomMsg.length)].msg, bot.user.displayAvatarURL())
         
         let fruits = await Fruits.find({ instock: true });
         fruits.map(frut => {
@@ -59,6 +57,15 @@ module.exports = {
             stocky.addField('Ability Levels', `${f.abilevels}`, true)
         });
         
-        message.channel.send(stocky);
+        if(broadcastChan && pingyrole){
+            message.guild.channels.cache.find(ch => ch.id === broadcastChan).send(`<@&${pingyrole}>`, stocky);
+        } else {
+            //perms first
+            if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`Please tell the owner/administrator to let me speak on <#${message.channel.id}>!`);
+            if(!message.channel.permissionsFor(message.guild.me).has('EMBED_LINKS')) return message.channel.send('I lack the permission \`EMBED_LINKS\`, please allow me to send Embed Links!');
+
+            message.channel.send(stocky); 
+        }
+        
   }
 }

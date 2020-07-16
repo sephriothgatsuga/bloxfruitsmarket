@@ -58,6 +58,7 @@ module.exports = {
           } else {
             return message.channel.send('Option Invalid!')
           }
+          if(args.length > 2) return message.channel.send(`Use \`stock change multiple ${args.slice(0, -1).join(' ')} ${option}\` instead!`)
           //db update
           await db.findOneAndUpdate({ name: fruit }, { $set: { instock: option } }, (err, doc) => {
             if(doc){ 

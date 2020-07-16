@@ -9,4 +9,4 @@ const FruitSchema = new mongoose.Schema({
     instock: Boolean
 });
 
-const Fruit = module.exports = mongoose.model('Fruit', FruitSchema);
+const Fruit = module.exports = mongoose.model('Fruit', FruitSchema, 'fruits');

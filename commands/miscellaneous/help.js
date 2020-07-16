@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const prefix = process.env.PREFIX;
+const Guild = require('../../utils/models/Guild');
 const { readdirSync } = require("fs");
 const { stripIndents } = require("common-tags");
 const { getColorFromURL } = require('color-thief-node');
@@ -22,6 +22,9 @@ module.exports = {
             .setColor(scolor)
             .setAuthor(`${message.guild.me.displayName} Help`, bot.user.displayAvatarURL())
             .setThumbnail(bot.user.displayAvatarURL())
+
+        let guild = await Guild.findOne({ guildId: message.guild.id })
+        let prefix = guild ? guild.prefix : process.env.PREFIX;
 
         if(!args[0]) {
             const categories = readdirSync("./commands/")
@@ -50,7 +53,7 @@ module.exports = {
             Syntax: \`<>\` - required | \`[]\` - optional\n
             **Command:** \`${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}\`
             **Description:** ${command.description || "No Description provided."}
-            **Usage:** ${command.usage ? `\`${prefix} ${command.name} ${command.usage}\`` : "No Usage"}
+            **Usage:** ${command.usage ? prefix == 'stock' ? `\`${prefix} ${command.name} ${command.usage}\`` : `\`${prefix}${command.name} ${command.usage}\`` : "No Usage"}
             **Accessible by:** ${command.accessableby || "Members"}
             **Aliases:** ${command.aliases ? command.aliases.map(a => `\`${a}\``).join(", ") : "None"}`)
         
