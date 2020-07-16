@@ -37,17 +37,14 @@ module.exports = {
         }
 
         let cdown = cd(start,  end,cd.HOURS|cd.MINUTES);
-        let randomMsg;
-        await randomMsgs.find({}, (err, res) => {
-            randomMsg = res
-        });
+        let randomMsg = await randomMsgs.find({});
         
         var stocky = new MessageEmbed()
             .setTitle(`Current Stock as of ${datee}`)
             .setDescription(`Verified Fruit Stock <:blurple_check:730595553242644640>\n\nNext Stock is in: ${cdown.hours} Hour(s), ${cdown.minutes} Minute(s)`)
             .setColor(color)
             .setThumbnail(bot.user.displayAvatarURL())
-            .setFooter(randomMsg[Math.floor(Math.random() * randomMsg.length)].msg, bot.user.displayAvatarURL())
+            .setFooter(randomMsg[Math.floor(Math.random() * Object.keys(randomMsg).length)].msg, bot.user.displayAvatarURL())
         
         let fruits = await Fruits.find({ instock: true });
         fruits.map(frut => {
@@ -63,7 +60,7 @@ module.exports = {
             //perms first
             if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`Please tell the owner/administrator to let me speak on <#${message.channel.id}>!`);
             if(!message.channel.permissionsFor(message.guild.me).has('EMBED_LINKS')) return message.channel.send('I lack the permission \`EMBED_LINKS\`, please allow me to send Embed Links!');
-
+            
             message.channel.send(stocky); 
         }
         

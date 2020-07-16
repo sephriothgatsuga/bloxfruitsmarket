@@ -1,6 +1,6 @@
 {
   "name": "bloxfruitsmarket",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Blox Fruits Market",
   "main": "bot.js",
   "scripts": {
