@@ -47,6 +47,7 @@ module.exports = {
             .setFooter(randomMsg[Math.floor(Math.random() * Object.keys(randomMsg).length)].msg, bot.user.displayAvatarURL())
         
         let fruits = await Fruits.find({ instock: true });
+        fruits.sort();
         fruits.map(frut => {
             let f = frut.toJSON();
             stocky.addField(`${f.type}`, `${f.emoji} ${f.name}`, true)
