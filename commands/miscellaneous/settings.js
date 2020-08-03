@@ -71,10 +71,10 @@ module.exports = {
 function getId(mention) {
 	if (!mention) return;
 
-	if (mention.startsWith('<#') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
-    } else if(mention.startsWith('<@&') && mention.endsWith('>')) {
-		mention = mention.slice(3, -1);
+	if(mention.startsWith('<@&') && mention.endsWith('>')) {
+        mention = mention.slice(3, -1);
+        return mention;
+    } else {
+        return mention;
     }
-    return mention;
 }
