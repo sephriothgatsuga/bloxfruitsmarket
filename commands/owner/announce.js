@@ -15,7 +15,7 @@ module.exports = {
             let pingyrole = gSettings.rolePing;
             if(!pingyrole) return message.channel.send('Set your Stock-Ping role first at \`settings\` command!');
 
-            bot.commands.get('view').run(bot, message, pingyrole, this.config.name); 
+            bot.commands.get('view').run(bot, message, pingyrole, 'announce'); 
         } else {
             return message.channel.send('This command has been deprecated and is replaced by the <#719838790860144741> channel! Kindly follow that channel and set it up to your server.').then(() => {
                 bot.commands.get('invite').run(bot, message);
