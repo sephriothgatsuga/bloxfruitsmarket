@@ -46,7 +46,7 @@ module.exports = {
                         changeTo = getId(changeTo);
                     //validating and updating
                     if(!message.guild.members.cache.find(m => m == message.guild.me).hasPermission('MENTION_EVERYONE')) return message.channel.send('Please allow me to mention everyone and other roles!');
-                    if(!message.guild.roles.cache.find(r => r.id === changeTo) || !message.guild.roles.cache.find(r => r.id === changeTo).managed){
+                    if(message.guild.roles.cache.find(r => r.id === changeTo) && !message.guild.roles.cache.find(r => r.id === changeTo).managed){
                         await gSettings.updateOne({ rolePing: changeTo });
                         changEmbed.setDescription(`<:blurple_check:730595553242644640> Your guild's fruit-stock role ping has been changed to <@&${changeTo}>!`)
                         message.channel.send(changEmbed);
