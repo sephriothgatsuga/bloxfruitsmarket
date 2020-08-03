@@ -12,9 +12,7 @@ module.exports = {
         if(message.member.roles.cache.has('720243516734832711')) {
             let gSettings = await Guild.findOne({ guildId: message.guild.id });
             if(!gSettings) return message.channel.send('Run \`settings\` command first!');
-            let broadcastChan = gSettings.annChannel;
             let pingyrole = gSettings.rolePing;
-            if(!broadcastChan) return message.channel.send('Set your Announcement Channel first at \`settings\` command!');
             if(!pingyrole) return message.channel.send('Set your Stock-Ping role first at \`settings\` command!');
 
             bot.commands.get('view').run(bot, message, pingyrole, this.config.name); 

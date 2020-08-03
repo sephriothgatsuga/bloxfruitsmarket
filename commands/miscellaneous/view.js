@@ -56,7 +56,7 @@ module.exports = {
         });
         
         if(type === 'announce'){
-            message.guild.channels.cache.find(ch => ch.id === broadcastChan).send(`<@&${pingyrole}>`, stocky);
+            message.guild.channels.cache.find(ch => ch.id === '719838790860144741').send(`<@&${pingyrole}>`, stocky);
         } else if(type === 'referenced') {
             message.channel.send(`${pingyrole == '@here' ? pingyrole : `<@&${pingyrole}>`}`, stocky);
         } else {
