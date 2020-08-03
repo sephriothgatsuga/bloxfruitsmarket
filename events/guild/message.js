@@ -3,7 +3,7 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 module.exports = async (bot, message) => { 
     if(message.reference){
-        if(Object.values(message.reference).some(r => r === '719838790860144741')){
+        if(Object.values(message.reference).some(r => r === '720299915531517962')){
            let gSettings = await Guild.findOne({ guildId: message.guild.id });
             if(!gSettings) return message.channel.send('Run \`settings\` command first!');
             let pingyrole = gSettings.rolePing;
@@ -11,7 +11,6 @@ module.exports = async (bot, message) => {
                 pingyrole = '@here'
                 message.channel.send(`\`@here\` will be used in pinging the people in your server! Please change this to your Stock-Ping role using the ${gSettings.prefix  == 'stock' ? `\`${gSettings.prefix} settings role @roleping\`` : `\`${gSettings.prefix}settings role @roleping\``}`);
             } 
-        
             bot.commands.get('view').run(bot, message, pingyrole, 'referenced');
         }
     } else {

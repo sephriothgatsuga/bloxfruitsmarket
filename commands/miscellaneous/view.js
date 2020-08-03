@@ -55,10 +55,12 @@ module.exports = {
             stocky.addField('Ability Levels', `${f.abilevels}`, true)
         });
         
-        if(type === 'announce'){
-            message.guild.channels.cache.find(ch => ch.id === '719838790860144741').send(`<@&${pingyrole}>`, stocky);
-        } else if(type === 'referenced') {
-            message.channel.send(`${pingyrole == '@here' ? pingyrole : `<@&${pingyrole}>`}`, stocky);
+        if(type === 'referenced') {
+            if(message.embeds.length === 0){
+                message.channel.send(`${pingyrole == '@here' ? pingyrole : `<@&${pingyrole}>`}`, stocky);
+            } else {
+                message.channel.send(`${pingyrole == '@here' ? pingyrole : `<@&${pingyrole}>`}`); 
+            }
         } else {
             //perms first
             if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`Please tell the owner/administrator to let me speak on <#${message.channel.id}>!`);
