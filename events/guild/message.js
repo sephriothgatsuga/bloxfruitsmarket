@@ -5,7 +5,6 @@ module.exports = async (bot, message) => {
     if(message.reference){
         if(Object.values(message.reference).some(r => r === '719838790860144741')){
            let gSettings = await Guild.findOne({ guildId: message.guild.id });
-            if(!gSettings) return message.channel.send('Run \`settings\` command first!');
             let pingyrole = gSettings.rolePing;
             if(!pingyrole) {
                 pingyrole = '@here'
