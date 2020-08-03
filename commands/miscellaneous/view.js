@@ -13,7 +13,7 @@ module.exports = {
         category: "miscellaneous",
         accessableby: "Members"
     },
-    run: async (bot, message, broadcastChan, pingyrole) => {
+    run: async (bot, message, pingyrole, type) => {
         let color = await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' }))
         let datee = date.format(message.createdAt, 'hh:mm A [GMT]Z', true);
 
@@ -36,7 +36,7 @@ module.exports = {
             end.setHours(0, 0, 0);
         }
 
-        let cdown = cd(start,  end,cd.HOURS|cd.MINUTES);
+        let cdown = cd(start, end, cd.HOURS|cd.MINUTES);
         let randomMsg = await randomMsgs.find({});
         
         var stocky = new MessageEmbed()
@@ -55,8 +55,10 @@ module.exports = {
             stocky.addField('Ability Levels', `${f.abilevels}`, true)
         });
         
-        if(broadcastChan && pingyrole){
+        if(type === 'announce'){
             message.guild.channels.cache.find(ch => ch.id === broadcastChan).send(`<@&${pingyrole}>`, stocky);
+        } else if(type === 'referenced') {
+            message.channel.send(`${pingyrole == '@here' ? pingyrole : `<@&${pingyrole}>`}`, stocky);
         } else {
             //perms first
             if(!message.channel.permissionsFor(message.guild.me).has('SEND_MESSAGES')) return message.author.send(`Please tell the owner/administrator to let me speak on <#${message.channel.id}>!`);
@@ -64,6 +66,5 @@ module.exports = {
             
             message.channel.send(stocky); 
         }
-        
   }
 }

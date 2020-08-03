@@ -1,6 +1,7 @@
 const date = require('date-and-time');
 const { MessageEmbed } = require('discord.js');
 const { getColorFromURL } = require('color-thief-node');
+const package = require('../../package.json');
 
 module.exports = {
     config: {
@@ -8,17 +9,18 @@ module.exports = {
         description: "Displays the bot's current status!",
         usage: "",
         category: "owner",
-        accessableby: "Members",
-        aliases: ["ut"]
+        accessableby: "Stockers",
+        aliases: ["stat"]
     },
     run: async (bot, message, args) => {
 
-    if(message.author.id !== '173977882765426688') return console.log('not owner');
+    if(!message.member.roles.cache.has('720243516734832711')) return console.log('not stocker ;-;');
 
     var status = new MessageEmbed()
         .setTitle('Bot Status')
         .setColor(await getColorFromURL(bot.user.displayAvatarURL({ format: 'png' })))
         .setThumbnail(bot.user.displayAvatarURL())
+        .addField('Bot Version', package.version)
         .addField('Channels', bot.channels.cache.size, true)
         .addField('Emojis', bot.emojis.cache.size, true)
         .addField('Guilds', bot.guilds.cache.size, true)

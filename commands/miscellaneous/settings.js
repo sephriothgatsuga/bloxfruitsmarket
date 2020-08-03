@@ -6,9 +6,9 @@ module.exports = {
     config: {
         name: "settings",
         description: "Displays the current settings of your guild",
-        usage: "[prefix/channel/role] [changeTo]",
+        usage: "[prefix/role] [changeTo]",
         category: "miscellaneous",
-        accessableby: "Members"
+        accessableby: "Owners/Administrators"
     },
     run: async (bot, message, args) => {
         let changeTo = args[1];
@@ -21,7 +21,6 @@ module.exports = {
                 console.log('Guild has settings!');
                 if(!args[0]) {
                     let prefix = gSettings.prefix;
-                    let stockChannel = gSettings.annChannel;
                     let role = gSettings.rolePing;
                     let color = await getColorFromURL(message.guild.iconURL({ format: 'png' }) || bot.user.displayAvatarURL({ format: 'png' }))
                     let thumbnail = message.guild.iconURL() || bot.user.displayAvatarURL();
@@ -32,7 +31,6 @@ module.exports = {
                         .setColor(color)
                         .addField('Guild ID', message.guild.id)
                         .addField('Guild Prefix', `\`${prefix}\``)
-                        .addField('Announcement Channel', stockChannel ? `<#${stockChannel}>` : 'Channel not set!')
                         .addField('Fruit-Stock Ping Role', role ? `<@&${role}>` : 'Role not set!')
                     message.channel.send(settings);
                 } else if(args[0] === 'prefix'){
@@ -42,34 +40,18 @@ module.exports = {
                     //sending new prefix
                     changEmbed.setDescription(`<:blurple_check:730595553242644640> Your guild's prefix has been changed to \`${changeTo}\`!`)
                     message.channel.send(changEmbed);
-                } else if(args[0] === 'channel'){
-                    if(!message.member.hasPermission('ADMINISTRATOR')) return
-                    if(!changeTo) return message.channel.send('Please put your desired Channel!');
-                        changeTo = getId(changeTo);
-                    //validation and updating
-                    if(message.guild.channels.cache.find(ch => ch.id === changeTo).permissionsFor(message.guild.me).has('EMBED_LINKS' && 'SEND_MESSAGES')){
-                        await gSettings.updateOne({ annChannel: changeTo });
-                        changEmbed.setDescription(`<:blurple_check:730595553242644640> Your guild's annoucement channel has been changed to <#${changeTo}>!!`)
-                        message.channel.send(changEmbed);
-                    } else {
-                        return message.author.send("I can't send to that channel! Use another channel or allow me to send embeds and messages on that channel!")
-                    }
                 } else if(args[0] === 'role'){
                     if(!message.member.hasPermission('ADMINISTRATOR')) return
                     if(!changeTo) return message.channel.send('Please put your desired Role to be pinged!');
                         changeTo = getId(changeTo);
                     //validating and updating
-                    if(!gSettings.annChannel) return message.channel.send('Set your Announcement Channel first!');
-                    if(message.guild.channels.cache.find(ch => ch.id === gSettings.annChannel).permissionsFor(message.guild.me).has('MENTION_EVERYONE')){
-                        if(!message.guild.roles.cache.find(r => r.id === changeTo).managed){
-                            await gSettings.updateOne({ rolePing: changeTo });
-                            changEmbed.setDescription(`<:blurple_check:730595553242644640> Your guild's fruit-stock role ping has been changed to <@&${changeTo}>!`)
-                            message.channel.send(changEmbed);
-                        } else {
-                            message.author.send("I can't use that role as the Stock Role Ping!")
-                        }
+                    if(!message.guild.members.cache.find(m => m == message.guild.me).hasPermission('MENTION_EVERYONE')) return message.channel.send('Please allow me to mention everyone and other roles!');
+                    if(!message.guild.roles.cache.find(r => r.id === changeTo).managed){
+                        await gSettings.updateOne({ rolePing: changeTo });
+                        changEmbed.setDescription(`<:blurple_check:730595553242644640> Your guild's fruit-stock role ping has been changed to <@&${changeTo}>!`)
+                        message.channel.send(changEmbed);
                     } else {
-                        message.author.send("I can't ping that role that you set on that channel! Allow me to ping that role or ping everyone!")
+                        message.author.send("I can't use that role as the Stock Role Ping!")
                     }
                 }
             } else {
